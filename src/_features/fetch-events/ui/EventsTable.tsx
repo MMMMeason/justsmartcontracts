@@ -22,7 +22,7 @@ export const EventsTable = ({ chain, event, items, loading }: TProps) => {
     key: input.name || index,
 
     render: (value: unknown) => (
-      <ParamValue abiType={input.type} value={value} />
+      <ParamValue abiType={input.type} value={value} abiParam={input} />
     ),
   }));
 
@@ -32,7 +32,13 @@ export const EventsTable = ({ chain, event, items, loading }: TProps) => {
       title: "Block",
       dataIndex: "blockNumber",
       key: "blockNumber",
-      render: (value: number) => <ParamValue abiType="uint" value={value} />,
+      render: (value: number) => (
+        <ParamValue
+          abiType="uint"
+          value={value}
+          abiParam={{ type: "uint" } as any}
+        />
+      ),
     },
     {
       title: "TxHash",
