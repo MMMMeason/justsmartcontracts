@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ErrorBoundary } from "react-error-boundary";
+import { ConfigProvider, theme } from "antd";
 import { ErrorPage } from "@pages/error";
 import { Layout } from "@widgets/layout";
 import { NotificationsProvider } from "@shared/lib/notify";
@@ -20,13 +21,23 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="description" content={metadata.description} />
       </Head>
       <ErrorBoundary fallback={<ErrorPage />}>
-        <Web3LoadingGuard>
-          <NotificationsProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </NotificationsProvider>
-        </Web3LoadingGuard>
+        <ConfigProvider
+          theme={{
+            algorithm: theme.defaultAlgorithm, // 使用 Light 主题
+            token: {
+              colorBgContainer: "#ffffff",
+              colorBgLayout: "#f9f9fb",
+            },
+          }}
+        >
+          <Web3LoadingGuard>
+            <NotificationsProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </NotificationsProvider>
+          </Web3LoadingGuard>
+        </ConfigProvider>
       </ErrorBoundary>
     </>
   );

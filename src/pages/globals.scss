@@ -31,8 +31,33 @@ a {
   text-decoration: none;
 }
 
+/* 强制使用 Light 主题，忽略系统主题设置 */
 @media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
+}
+
+/* 确保所有元素都使用 Light 主题 */
+* {
+  color-scheme: light !important;
+}
+
+/* 强制 Ant Design 组件使用 Light 主题 */
+.ant-app {
+  color-scheme: light !important;
+}
+
+/* 确保背景色始终为浅色 */
+body {
+  background-color: #f9f9fb !important;
+  color: #000000 !important;
+}
+
+/* 确保所有容器都使用浅色背景 */
+.ant-layout,
+.ant-layout-content,
+.ant-layout-header,
+.ant-layout-sider {
+  background-color: #f9f9fb !important;
 }
